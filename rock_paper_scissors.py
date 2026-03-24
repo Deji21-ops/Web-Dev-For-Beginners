@@ -1,17 +1,32 @@
 import random
 
 def get_computer_choice():
+    """Return a random choice of rock, paper, or scissors."""
     return random.choice(["rock", "paper", "scissors"])
 
 def determine_winner(player, computer):
+    """Determine the winner of a round.
+
+    Args:
+        player: The player's choice ('rock', 'paper', or 'scissors').
+        computer: The computer's choice ('rock', 'paper', or 'scissors').
+
+    Returns:
+        'tie' if both choices are equal, 'player' if the player wins,
+        or 'computer' if the computer wins. Returns None for invalid input.
+    """
     if player == computer:
         return "tie"
     wins = {"rock": "scissors", "scissors": "paper", "paper": "rock"}
-    if wins[player] == computer:
+    beaten = wins.get(player)
+    if beaten is None:
+        return None
+    if beaten == computer:
         return "player"
     return "computer"
 
 def play():
+    """Run the Rock, Paper, Scissors game loop."""
     print("Welcome to Rock, Paper, Scissors!")
     while True:
         player_choice = input("Enter rock, paper, or scissors (or 'quit' to exit): ").strip().lower()
